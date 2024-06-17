@@ -17,8 +17,7 @@ public class UsersController:ControllerBase
         _context = context;
     }
 
-    [HttpGet]// /api/users/id
-
+    [HttpGet]
     public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
     {
         var users = await _context.Users.ToListAsync();
@@ -26,7 +25,7 @@ public class UsersController:ControllerBase
         return users;
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("{id}")]// /api/users/id
     public ActionResult<AppUser> GetUser(int id)
     {
         return _context.Users.Find(id);

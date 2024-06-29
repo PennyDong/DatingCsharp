@@ -9,13 +9,23 @@ import { FormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
+import { ListsComponent } from './lists/lists.component';
+import { MessagesComponent } from './messages/messages.component';
+import { MemberListComponent } from './members/member-list/member-list.component';
+import { MemberDetailListComponent } from './members/member-detail-list/member-detail-list.component';
+import { ToastrModule } from 'ngx-toastr';
+import { SharedModule } from './_modules/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     HomeComponent,
-    RegisterComponent
+    RegisterComponent,
+    ListsComponent,
+    MessagesComponent,
+    MemberListComponent,
+    MemberDetailListComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +33,9 @@ import { RegisterComponent } from './register/register.component';
     HttpClientModule,
     BrowserAnimationsModule,  //ngx bootstrap
     FormsModule,
-    BsDropdownModule.forRoot()
+
+    //共享模塊
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

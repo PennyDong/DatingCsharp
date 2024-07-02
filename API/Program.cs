@@ -1,5 +1,7 @@
+using API.Data;
 using API.Extensions;
 using API.Middleware;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,5 +31,22 @@ app.UseAuthentication(); //身分認證是否為有效的token
 app.UseAuthorization(); //
 
 app.MapControllers();
+
+//訪問所有應用程序
+using var scope = app.Services.CreateScope();
+var services = scope.ServiceProvider;
+
+try
+{
+    var context = services.GetRequiredService<DataContext>();
+    //資料庫創建Table
+    await context.Database.MigrateAsync();
+    await Seed.SeedUsers(context);
+}
+catch (Exception ex)
+{
+    var logger = services.GetService<ILogger<Program>>();
+    logger.LogError(ex,"An error occurred during migration");
+}
 
 app.Run();

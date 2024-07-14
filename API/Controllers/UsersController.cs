@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Security.Claims;
 using API.Data;
 using API.DTOs;
 using API.Entities;
@@ -43,5 +44,21 @@ public class UsersController:BaseApiController
     {
         return await _userRepository.GetMemberAsync(username);
 
+    }
+
+    [HttpPut]
+    public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
+    {   //防止.FindFirst() 出現錯誤 所以使用 ? 來表示參數可以是null
+        var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        var user = await _userRepository.GetUserByUsernameAsync(username);
+
+        if(user == null) return NotFound();
+        _mapper.Map(memberUpdateDto,user);
+        
+        //儲存所有的異步資料，如果成功回傳狀態碼 204
+        if(await _userRepository.SaveAllAsync()) return NoContent();
+
+        //如果失敗回傳
+        return BadRequest("Failed to update user");
     }
 }

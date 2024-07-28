@@ -4,6 +4,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ToastrModule } from 'ngx-toastr';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { FileUploadModule } from 'ng2-file-upload';
 
 
 
@@ -21,14 +22,16 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     //過場動畫
     NgxSpinnerModule.forRoot({
       type:'ball-scale-multiple'
-    }) 
+    }),
+    //上傳套件
+    FileUploadModule 
   ],
   exports:[
     BsDropdownModule,
     ToastrModule,
     TabsModule,
-    NgxSpinnerModule
-
+    NgxSpinnerModule,
+    FileUploadModule
   ]
 })
 export class SharedModule { }

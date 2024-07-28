@@ -22,8 +22,7 @@ export class AccountService {
         const user =response;
         if(user){
           localStorage.setItem('user',JSON.stringify(user));
-          //傳遞值告訴接下來的動作(保持登入狀態)
-          this.currentUserSource.next(user);
+          this.setCurrentUser(user);
         }
       })
     )
@@ -33,18 +32,19 @@ export class AccountService {
     return this.http.post<User>(this.baseUrl+'account/register',model).pipe(
       map(user =>{
         if(user){
-          localStorage.setItem('user',JSON.stringify(user));
-          this.currentUserSource.next(user);
+          // localStorage.setItem('user',JSON.stringify(user));
+          // this.currentUserSource.next(user);
+          this.setCurrentUser(user);
         }
        
       })
     )
   }
 
-
-
   //定義一個方法設定當前用戶
   setCurrentUser(user:User){
+    localStorage.setItem('user',JSON.stringify(user));
+    //傳遞值告訴接下來的動作(保持登入狀態)
     this.currentUserSource.next(user);
   }
 

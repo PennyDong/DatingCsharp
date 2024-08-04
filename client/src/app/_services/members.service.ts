@@ -32,7 +32,8 @@ export class MembersService {
   }
 //連接後端接口 (api/users/username)
   getMember(username: string){
-    const member =this.members.find(x => x.userName)
+    //const member =this.members.find(x => x.userName)
+    const member = this.members.find(x => x.userName === username);
     if(member) return of(member);
     return this.http.get<Member>(this.baseUrl+'users/'+username);//,this.getHttpOptions()
   }

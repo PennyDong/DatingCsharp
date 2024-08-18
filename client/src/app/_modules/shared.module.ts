@@ -6,8 +6,9 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { FileUploadModule } from 'ng2-file-upload';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-
-
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { TimeagoModule } from "ngx-timeago";
 @NgModule({
   declarations: [],
   imports: [
@@ -27,6 +28,11 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     FileUploadModule
     //日期選擇器
     ,BsDatepickerModule.forRoot()
+    //分頁模組
+    ,PaginationModule
+    ,ButtonsModule.forRoot()
+    //顯示用戶幾分鐘前上線
+    ,TimeagoModule.forRoot()
   ],
   exports:[
     BsDropdownModule,
@@ -34,7 +40,10 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     TabsModule,
     NgxSpinnerModule,
     FileUploadModule,
-    BsDatepickerModule
+    BsDatepickerModule,
+    PaginationModule,
+    ButtonsModule,
+    TimeagoModule
   ]
 })
 export class SharedModule { }

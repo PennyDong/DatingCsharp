@@ -31,7 +31,7 @@ namespace API.Services
                 var uploadParams = new ImageUploadParams
                 {
                     File = new FileDescription(file.FileName,stream),
-                    Transformation = new Transformation().Height(120).Width(120).Crop("fill").Gravity("face"),
+                    Transformation = new Transformation().Height(50).Width(50).Crop("fill").Gravity("face"),
                     Folder = "da-net7"
                 };
 

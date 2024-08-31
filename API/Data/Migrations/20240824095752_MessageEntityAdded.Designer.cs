@@ -3,6 +3,7 @@ using System;
 using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240824095752_MessageEntityAdded")]
+    partial class MessageEntityAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.6");
@@ -73,7 +76,7 @@ namespace API.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Content")
+                    b.Property<string>("Context")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("DateRead")
@@ -91,9 +94,6 @@ namespace API.Data.Migrations
                     b.Property<string>("RecipientUsername")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("RecipinetId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<bool>("SenderDeleted")
                         .HasColumnType("INTEGER");
 
@@ -109,7 +109,7 @@ namespace API.Data.Migrations
 
                     b.HasIndex("SenderId");
 
-                    b.ToTable("Messages");
+                    b.ToTable("Message");
                 });
 
             modelBuilder.Entity("API.Entities.Photo", b =>
